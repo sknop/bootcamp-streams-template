@@ -36,11 +36,10 @@ public class HelloWorld {
         // Your stream code goes here
         // **************************
 
-        try(var stream = new KafkaStreams(builder.build(), properties)) {
-            stream.start();
+        var stream = new KafkaStreams(builder.build(), properties);
+        stream.start();
 
-            // Add shutdown hook to respond to SIGTERM and gracefully close Kafka Streams
-            Runtime.getRuntime().addShutdownHook(new Thread(stream::close));
-        }
+        // Add shutdown hook to respond to SIGTERM and gracefully close Kafka Streams
+        Runtime.getRuntime().addShutdownHook(new Thread(stream::close));
     }
 }
